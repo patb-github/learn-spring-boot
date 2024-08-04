@@ -4,23 +4,27 @@ After finishing my bootcamp where I learned the MERN stack, I wanted to try my h
 
 ## Things I Learned
 
-### 1. Inversion of Control (IoC)
-The Spring framework employs the IoC design principle. In a traditional system, components are *tightly-coupled*, 
-
-### 2. Convention Over Configuration
-The Spring Boot framework makes it easy to start a project by configuring reasonable defaults, reducing the number of decisions the developer needs to make.
-
-### 3. Embedded Server
-The Spring Boot framework comes with an embedded server.
+### 1. Spring and Spring Boot Features
+- **Inversion of Control (IoC)** - The Spring framework employs the IoC design principle, which means that control is given to the framework using the Dependency Injector. (I still don't quite understand this concept yet)
+- **Convention Over Configuration** - The Spring Boot framework makes it easy to start a project by configuring reasonable defaults, reducing the number of decisions the developer needs to make.
+- **Embedded Server** - Spring Boot comes with an embedded server.
+- **Production-ready Features** - Spring Boot has built-in functionalities to manage and monitor applications in a production environment.
 
 
-### 5. Installing MySQL and Using Environment Variables
-For this tutorial, we used MySQL to start a local database server. I followed [this](https://www.youtube.com/watch?v=u96rVINbAUI) tutorial for installing MySQL Server and Workbench. Next, to connect Spring to the database, we need to provide the url, username and password. The tutorial did not show how to use a `.env` file, so I did some searching. To keep credentials private, we can add a `.env` file in the root directory; then, to access the values of a variable `VAR`, use `${VAR}`. It took a bit of time to set up, but I think it was worthwhile, as I could use what I learned for a future project. 
+### 2. Installing MySQL and Using Environment Variables
+For this tutorial, we used MySQL to start a local database server. I followed [this](https://www.youtube.com/watch?v=u96rVINbAUI) tutorial for installing MySQL Server and Workbench. Next, to connect Spring to the database, we need to provide the url, username and password. The tutorial did not show how to use a `.env` file, so I did some searching. To keep credentials private, we can add a `.env` file in the root directory; then, to access the values of a variable `VAR`, use `${VAR}`.  
 
-### 6. Profiles
+### 3. Profiles
 In /src/main/resources/ we can add more *profiles*. These are configurations that are applied on top of the the base `application.properties`. To create new profile, simply create a file `application-name.properties`, where `name` is the name of the profile. To use a profile, add the line `spring.profiles.active=name` in the `application.properties` file, where `name` is the name of the profile.
 
 We can also create controllers for specific profiles by adding an `@Profile("name")` annotation to the controller class, where `name` is the name of the profile. If two endpoints from two differet controllers are the same, we have to make sure that both of the controllers have a profile; i.e., we cannot add `@Profile("name")` to one and leave the other as a default.
+
+### 4. Building a Distributable jar file
+In VS Code, in the "JAVA PROJECTS" section, right click on the project, then select Gradle > Run Gradle Tasks... > bootJar
+A `.jar` file will then be created in /build/libs/
+To run the file, open a terminal, go into the directory containing the created file, and run `java -jar your-created-project.jar`.
+
+**Note**: for this to work, I had to hard-code the database username and password instead of using the values from `.env`.
 
 ## Problems & Solutions
 
