@@ -15,7 +15,12 @@ The Spring Boot framework comes with an embedded server.
 
 
 ### 5. Installing MySQL and Using Environment Variables
-For this tutorial, we used MySQL to start a local database server. I followed [this](https://www.youtube.com/watch?v=u96rVINbAUI) tutorial for installing MySQL Server and Workbench. Next, to connect Spring to the database, we need to provide the url, username and password. The tutorial did not show how to use a .env file, so I did some searching. To keep credentials private, you can add a .env file in the root directory, then to access the values of a variable `VAR`, use `${VAR}`. It took a bit of time to set up, but I think it was worthwhile, as I could use what I learned for a future project. 
+For this tutorial, we used MySQL to start a local database server. I followed [this](https://www.youtube.com/watch?v=u96rVINbAUI) tutorial for installing MySQL Server and Workbench. Next, to connect Spring to the database, we need to provide the url, username and password. The tutorial did not show how to use a `.env` file, so I did some searching. To keep credentials private, we can add a `.env` file in the root directory; then, to access the values of a variable `VAR`, use `${VAR}`. It took a bit of time to set up, but I think it was worthwhile, as I could use what I learned for a future project. 
+
+### 6. Profiles
+In /src/main/resources/ we can add more *profiles*. These are configurations that are applied on top of the the base `application.properties`. To create new profile, simply create a file `application-name.properties`, where `name` is the name of the profile. To use a profile, add the line `spring.profiles.active=name` in the `application.properties` file, where `name` is the name of the profile.
+
+We can also create controllers for specific profiles by adding an `@Profile("name")` annotation to the controller class, where `name` is the name of the profile. If two endpoints from two differet controllers are the same, we have to make sure that both of the controllers have a profile; i.e., we cannot add `@Profile("name")` to one and leave the other as a default.
 
 ## Problems & Solutions
 
