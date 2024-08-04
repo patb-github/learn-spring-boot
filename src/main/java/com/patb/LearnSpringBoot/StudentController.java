@@ -1,5 +1,6 @@
 package com.patb.LearnSpringBoot;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,7 @@ public class StudentController {
     }
     
     @PatchMapping("/student/update")
-    public Student updateEmail(@RequestParam("student_id") Long id, @RequestParam("new_email") String email) {
+    public Student updateEmail(@RequestParam("student_id") String id, @RequestParam("new_email") String email) {
         Optional<Student> studentToUpdateOption = studentRepository.findById(id);
         if (studentToUpdateOption.isPresent()) {
             Student studentToUpdate = studentToUpdateOption.get();
@@ -43,5 +44,10 @@ public class StudentController {
             return studentRepository.save(studentToUpdate);
         }
         return null;
+    }
+
+    @GetMapping("/student/findByEmailDomain")
+    public List<Student> findStudentByDomain(@RequestParam("domain") String domain) {
+        return studentRepository.findByDomain(domain);
     }
 }
